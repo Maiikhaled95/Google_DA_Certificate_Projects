@@ -37,7 +37,7 @@ SELECT COUNT(*)
 FROM temp_tripdata2021;
 ```
 
-There were 5,400,660 ride
+There were __5,400,660__ ride
 
 Then, I started to check the table from any duplicates or null values
 
@@ -66,7 +66,7 @@ AND end_station_name IS NULL
 AND end_station_id IS NULL;
 ```
 
-There were 407,124 ride
+There were __407,124__ ride
 
 To count the non-null values in the table
 
@@ -79,7 +79,7 @@ AND end_station_name IS NOT NULL
 AND end_station_id IS NOT NULL;
 ```
 
-There were 4,435,515
+There were __4,435,515__
 
 To create the final table without null values, drop the non-important columns as there are not needed for analysis and delete the first table
 
@@ -128,7 +128,7 @@ ORDER BY
 	rides DESC
 LIMIT 5;
 ```
-The most frequent time to use the bike is around 17:45 
+The most frequent time to use the bike is around __17:45__ 
 
 ``` sql
 SELECT 
@@ -145,6 +145,156 @@ ORDER BY
 LIMIT 12;
 ```
 
-The most month for using the bike is July and the least month is February
+The most month for using the bike is __July__ and the least month is __February__
 
+```sql
+SELECT 
+	to_char(started_at,'Day') AS day,
+	COUNT(*) AS rides
+FROM
+	F_tripdata2021
+GROUP BY
+	day
+Having 
+	COUNT(*) > 1
+ORDER BY 
+	rides DESC
+LIMIT 7;
+```
 
+The most day for using the bike is __Saturday__ and the least month is __Monday__
+
+```sql
+SELECT
+	member_casual AS riders,
+	COUNT(*) AS rides
+FROM
+	F_tripdata2021
+GROUP BY
+	riders
+ORDER BY
+	rides DESC;
+```
+
+The total number of rides for __member__ riders is __2,483,545__ and __1,951,970__ for __casual__ riders
+	
+```sql
+SELECT
+	rideable_type,
+	COUNT(*) AS rides
+FROM
+	F_tripdata2021
+GROUP BY
+	 rideable_type
+ORDER BY
+	rides DESC;
+```
+
+The total number of rides for __classic__ bike is __3,147,786__, __994,319__ for __electric__ bike and __293,410__ for __docked__ bike
+
+```sql
+SELECT
+	member_casual AS riders,
+	rideable_type,
+	COUNT(*) AS rides
+FROM
+	F_tripdata2021
+GROUP BY
+	riders, rideable_type
+ORDER BY
+	riders DESC, rides DESC;
+```
+The number of rides for member rides is 
+
+```sql
+SELECT
+    member_casual AS rider,
+    to_char(started_at,'month') AS month,
+    count(*) AS rides	
+FROM
+	F_tripdata2021
+GROUP BY
+	rider, month
+ORDER BY 
+    rider ASC, rides DESC;
+```
+
+```sql
+SELECT
+    member_casual AS rider,
+    to_char(started_at,'day') AS day,
+    count(*) AS rides	
+FROM
+	F_tripdata2021
+GROUP BY
+	rider, day
+ORDER BY 
+    rider ASC, rides DESC;
+```
+	
+```sql
+SELECT 
+	member_casual AS riders,
+	CONCAT(COUNT(ride_id)*100/
+	(SELECT COUNT(*)
+	 FROM F_tripdata2021),'%') AS Percentage
+FROM 
+	F_tripdata2021
+GROUP BY
+	riders
+ORDER BY
+	Percentage DESC;
+```
+	
+``` sql
+SELECT 
+	member_casual AS riders,
+	rideable_type,
+	CONCAT(COUNT(ride_id)*100/
+	(SELECT COUNT(*)
+	 FROM F_tripdata2021),'%') AS Percentage
+FROM 
+	F_tripdata2021
+GROUP BY
+	riders,rideable_type
+ORDER BY
+	riders DESC,
+	Percentage DESC;
+```
+	
+-- Calculating the average length of the ride by member_casual
+SELECT
+	member_casual AS rider,
+	Extract(minute from AVG(ended_at - started_at))AS average_ride_length
+FROM
+	F_tripdata2021
+GROUP BY
+	rider
+Order by 
+	rider ASC;
+
+-- Calculating the average length of the ride by day for riders
+SELECT
+	member_casual AS rider,
+	to_char(started_at,'Day') AS day,
+	Extract(minute from AVG(ended_at - started_at))AS average_ride_length
+FROM
+	F_tripdata2021
+GROUP BY
+	rider,day
+Order by 
+	rider DESC,
+	average_ride_length DESC;
+
+-- Calculating the average length of the ride by month for riders
+SELECT
+	member_casual AS rider,
+	to_char(started_at,'month') AS month,
+	Extract(minute from AVG(ended_at - started_at))AS average_ride_length
+FROM
+	F_tripdata2021
+GROUP BY
+	rider,month
+Order by
+	rider DESC,
+	average_ride_length DESC;
