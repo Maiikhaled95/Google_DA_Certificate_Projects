@@ -219,7 +219,7 @@ The average length of the ride for __Casual__ riders is __32__ minutes, While fo
 Here is my tableau dashboard supporting my insights:
 https://public.tableau.com/app/profile/maiikhaled95/viz/CyclisticProject_16739907717440/Dashboard1
 
-My Topp Three Recommendations:
+My Top Three Recommendations:
 1. Getting more data about bike types to investgate about the reasons of prefering __Classic__ bikes over the other types
 2. Getting more data about __Member__ and __Casual__ pricing to get __Revenue__ from their rides
 3. Making discounts on __Member__ subscription to encourage __Casual__ riders to be member
