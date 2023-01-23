@@ -78,7 +78,7 @@ AND end_station_name IS NOT NULL
 AND end_station_id IS NOT NULL;
 ```
 
-There were __4,435,515__
+There were __4,435,515__ rides
 
 To create the final table without null values, drop the non-important columns as there are not needed for analysis and delete the first table
 
@@ -141,7 +141,7 @@ ORDER BY
 	rides DESC;
 ```
 
-The total number of rides for __member__ riders is __2,483,545__ and __1,951,970__ for __casual__ riders
+The total number of rides for __Member__ riders is __2,483,545__ and __1,951,970__ for __Casual__ riders
 	
 ```sql
 SELECT
@@ -155,7 +155,7 @@ ORDER BY
 	rides DESC;
 ```
 
-The total number of rides for __classic__ bike is __3,147,786__, __994,319__ for __electric__ bike and __293,410__ for __docked__ bike
+The total number of rides for __Classic__ bike is __3,147,786__, __994,319__ for __Electric__ bike and __293,410__ for __Docked__ bike
 
 ```sql
 SELECT
@@ -169,7 +169,7 @@ GROUP BY
 ORDER BY
 	riders DESC, rides DESC;
 ```
-The total number of rides for __Member__ riders is __1,939,914__ for __classic__ bike, __544,450__ for __electric__ bike and __1__ for __docked__ bike. While, for __Casual__ riders, the number of rides is __1,208,592__ for __classic__ bike, __449,969__ for __electric__ bike and __293,409__ for __docked__ bike.
+The total number of rides for __Member__ riders is __1,939,914__ for __Classic__ bike, __544,450__ for __Electric__ bike and __1__ for __Docked__ bike. While, for __Casual__ riders, the number of rides is __1,208,592__ for __Classic__ bike, __449,969__ for __Electric__ bike and __293,409__ for __Docked__ bike.
 
 ```sql
 SELECT
@@ -212,4 +212,13 @@ GROUP BY
 Order by 
 	rider ASC;
 ```
-The average length of the ride for __Casual__ riders is __32__ minutes, While for __Member__ riders is __13__ minutes
+The average length of the ride for __Casual__ riders is __32__ minutes, While for __Member__ riders is __13__ minutes. While The number of rides for __Member__ riders is greater.
+
+Here is my tableau dashboard supporting my insights:
+https://public.tableau.com/app/profile/maiikhaled95/viz/CyclisticProject_16739907717440/Dashboard1
+
+My Topp Three Recommendations:
+1. Getting more data about bike types to investgate about the reasons of prefering __Classic__ bikes over the other types
+2. Getting more data about __Member__ and __Casual__ pricing to get __Revenue__ from their rides
+3. Making discounts on __Member__ subscription to encourage __Casual__ riders to be member
+ 
