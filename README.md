@@ -169,7 +169,9 @@ GROUP BY
 ORDER BY
 	riders DESC, rides DESC;
 ```
-The total number of rides for __Member__ riders is __1,939,914__ for __Classic__ bike, __544,450__ for __Electric__ bike and __1__ for __Docked__ bike. While, for __Casual__ riders, the number of rides is __1,208,592__ for __Classic__ bike, __449,969__ for __Electric__ bike and __293,409__ for __Docked__ bike.
+The total number of rides for __Member__ riders is __1,939,914__ for __Classic__ bike, __544,450__ for __Electric__ bike and __1__ for __Docked__ bike. 
+
+While, for __Casual__ riders, the number of rides is __1,208,592__ for __Classic__ bike, __449,969__ for __Electric__ bike and __293,409__ for __Docked__ bike.
 
 ```sql
 SELECT
