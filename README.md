@@ -129,40 +129,6 @@ LIMIT 5;
 ```
 The most frequent time to use the bike is around __17:45__ 
 
-``` sql
-SELECT 
-	to_char(started_at,'Month') AS month,
-	COUNT(*) AS rides
-FROM
-	F_tripdata2021
-GROUP BY
-	month
-Having 
-	COUNT(*) > 1
-ORDER BY 
-	rides DESC
-LIMIT 12;
-```
-
-The most month for using the bike is __July__ and the least month is __February__
-
-```sql
-SELECT 
-	to_char(started_at,'Day') AS day,
-	COUNT(*) AS rides
-FROM
-	F_tripdata2021
-GROUP BY
-	day
-Having 
-	COUNT(*) > 1
-ORDER BY 
-	rides DESC
-LIMIT 7;
-```
-
-The most day for using the bike is __Saturday__ and the least month is __Monday__
-
 ```sql
 SELECT
 	member_casual AS riders,
@@ -203,7 +169,7 @@ GROUP BY
 ORDER BY
 	riders DESC, rides DESC;
 ```
-The number of rides for member rides is 
+The total number of rides for __Member__ riders is __1,939,914__ for __classic__ bike, __544,450__ for __electric__ bike and __1__ for __docked__ bike. While, for __Casual__ riders, the number of rides is __1,208,592__ for __classic__ bike, __449,969__ for __electric__ bike and __293,409__ for __docked__ bike.
 
 ```sql
 SELECT
@@ -218,6 +184,8 @@ ORDER BY
     rider ASC, rides DESC;
 ```
 
+The most month for using the bikes is __July__ for __Casual__ ridrs and the least month is __February__ for them. While, the most month for using the bikes by __Member__ riders is __April__ and the least one is also __February__
+
 ```sql
 SELECT
     member_casual AS rider,
@@ -230,38 +198,10 @@ GROUP BY
 ORDER BY 
     rider ASC, rides DESC;
 ```
-	
+
+The most day for using the bikes is __Saturday__ by __Casual__ riders and the least day is __Wednesday__. While, the most day for using the bikes for by __Member__ riders is __Tuesday__ and the least one is __Sunday__
+
 ```sql
-SELECT 
-	member_casual AS riders,
-	CONCAT(COUNT(ride_id)*100/
-	(SELECT COUNT(*)
-	 FROM F_tripdata2021),'%') AS Percentage
-FROM 
-	F_tripdata2021
-GROUP BY
-	riders
-ORDER BY
-	Percentage DESC;
-```
-	
-``` sql
-SELECT 
-	member_casual AS riders,
-	rideable_type,
-	CONCAT(COUNT(ride_id)*100/
-	(SELECT COUNT(*)
-	 FROM F_tripdata2021),'%') AS Percentage
-FROM 
-	F_tripdata2021
-GROUP BY
-	riders,rideable_type
-ORDER BY
-	riders DESC,
-	Percentage DESC;
-```
-	
--- Calculating the average length of the ride by member_casual
 SELECT
 	member_casual AS rider,
 	Extract(minute from AVG(ended_at - started_at))AS average_ride_length
@@ -271,29 +211,5 @@ GROUP BY
 	rider
 Order by 
 	rider ASC;
-
--- Calculating the average length of the ride by day for riders
-SELECT
-	member_casual AS rider,
-	to_char(started_at,'Day') AS day,
-	Extract(minute from AVG(ended_at - started_at))AS average_ride_length
-FROM
-	F_tripdata2021
-GROUP BY
-	rider,day
-Order by 
-	rider DESC,
-	average_ride_length DESC;
-
--- Calculating the average length of the ride by month for riders
-SELECT
-	member_casual AS rider,
-	to_char(started_at,'month') AS month,
-	Extract(minute from AVG(ended_at - started_at))AS average_ride_length
-FROM
-	F_tripdata2021
-GROUP BY
-	rider,month
-Order by
-	rider DESC,
-	average_ride_length DESC;
+```
+The average length of the ride for __Casual__ riders is __32__ minutes, While for __Member__ riders is __13__ minutes
