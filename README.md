@@ -1,5 +1,3 @@
-## Cyclistic Bike Share Project
-
 ### Introduction
 Welcome to the Cyclistic bike-share analysis case study! In this case study, I need to show how annual members and casual riders use Cyclistic bikes differently. I used the monthly trip data of 2021 to make an analysis for the whole year.I used Postgresql to build my database and start analyzing the dataset.
 
